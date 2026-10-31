@@ -4,7 +4,7 @@ Last Signal is a short text adventure written in Kotlin. You wake up on a damage
 
 My purpose for this project is to practice Kotlin variables, expressions, conditions, loops, functions, and classes in a small playable game. The rooms and player are represented by classes. A mutable list holds the player's inventory, with items added when collected and removed when used.
 
-Software Demo Video: Pending recording and upload.
+[Software Demo Video](https://youtu.be/dWC1SSqRf84)
 
 # Development Environment
 
