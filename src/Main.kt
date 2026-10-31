@@ -1,3 +1,4 @@
+// Each room stores its description, exits, and available items.
 class Room(
     val name: String,
     val description: String,
@@ -5,6 +6,7 @@ class Room(
     val items: MutableList<String> = mutableListOf()
 )
 
+// Track where the player is and what they are carrying.
 class Player {
     var location = "quarters"
     val inventory = mutableListOf<String>()
@@ -12,10 +14,12 @@ class Player {
 
 class Game {
     private val player = Player()
+    // Remember which puzzles have been completed.
     private var engineeringUnlocked = false
     private var podPowered = false
     private var signalSent = false
     private var running = true
+    // Room names connect the exits to other rooms.
     private val rooms = mapOf(
         "quarters" to Room(
             "Crew Quarters",
@@ -78,6 +82,7 @@ class Game {
             running = false
             return null
         }
+        // Ignore extra spaces and capital letters in player input.
         return answer.trim().lowercase()
     }
 
@@ -111,6 +116,7 @@ class Game {
             println("There is no exit with that name here.")
             return
         }
+        // The player must unlock engineering before entering.
         if (nextRoom == "engineering" && !engineeringUnlocked) {
             println("The engineering door is locked. Use a keycard in the corridor.")
             return
@@ -152,6 +158,7 @@ class Game {
         }
         showInventory()
         val item = ask("Use which item? ") ?: return
+        // Only allow items that the player has picked up.
         if (item !in player.inventory) {
             println("You are not carrying that item.")
             return
@@ -188,6 +195,7 @@ class Game {
             println("The flight recorder fits the transmitter inside the escape pod.")
             return
         }
+        // The rescue signal needs the power cell to be installed first.
         if (!podPowered) {
             println("The transmitter needs power first.")
             return
